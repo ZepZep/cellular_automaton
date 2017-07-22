@@ -27,8 +27,12 @@ CARuleModel::CARuleModel(int rowLen, int neighbourhood, QObject *parent)
     if(s > maxSize) size = maxSize;
     else size = s;
 
+    sim = new CASimulator();
+    initLine = new bool[rowLen];
+    for(int i=0; i<rowLen; i++)
+        initLine[i] = 0;
+    initLine[(rowLen)/2] = 1;
     qDebug() << "Created model with size " <<size;
-
 }
 
 void CARuleModel::makeData()
@@ -93,20 +97,38 @@ QVariant CARuleModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QImage CARuleModel::makeImage(int ruleNum) const
+QImage CARuleModel::makeImage(int rule) const
 {
     //qDebug() << "Generating " <<ruleNum;
-    qsrand( ruleNum );
+//    qsrand( ruleNum );
     QImage img(rowLen, rowLen, QImage::Format_Mono);
 
-    for(int y=0; y<rowLen; y++)
+
+    for(int x=0; x<rowLen; x++)
+        img.setPixel(x, 0, initLine[x]);
+
+    sim->setLine(initLine, rowLen);
+    sim->setRule(rule);
+    bool *line;
+
+    for(int y=1; y<rowLen; y++)
     {
-        int rnum = qrand();
+        line = sim->nextLine();
         for(int x=0; x<rowLen; x++)
         {
-            img.setPixel(x, y, (rnum >> x) % 2);
+            img.setPixel(x, y, line[x]);
         }
     }
+
+//    for(int y=1; y<rowLen; y++)
+//    {
+//        line = sim->nextLine();
+//        int rnum = qrand();
+//        for(int x=0; x<rowLen; x++)
+//        {
+//            img.setPixel(x, y, (rnum >> x) % 2);
+//        }
+//    }
 
     return img;
 }

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QItemSelection>
 
+#include "caevoview.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    CAEvoView *evoView;
 
 private slots:
     void ruleChanged(QItemSelection cur, QItemSelection old);

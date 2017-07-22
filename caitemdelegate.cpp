@@ -27,9 +27,6 @@ void CAItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option
     font.setPixelSize(30);
     painter->setFont(font);
 
-
-
-
     if(option.state & QStyle::State_Selected)
     {
         painter->setPen(option.palette.highlightedText().color());

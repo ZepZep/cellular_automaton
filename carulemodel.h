@@ -2,6 +2,7 @@
 #define CARULEMODEL_H
 
 #include <QAbstractListModel>
+#include "casimulator.h"
 
 class CARuleModel : public QAbstractListModel
 {
@@ -17,7 +18,7 @@ public:
 
 private:
 
-    QImage makeImage(int ruleNum) const;
+    QImage makeImage(int rule) const;
 
 
     int rowLen;
@@ -27,6 +28,9 @@ private:
 
     int maxSize;
     int size;
+
+    CASimulator *sim;
+    bool *initLine;
 
 };
 

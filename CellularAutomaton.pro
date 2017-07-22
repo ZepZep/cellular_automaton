@@ -27,12 +27,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     carulemodel.cpp \
-    caitemdelegate.cpp
+    caitemdelegate.cpp \
+    casimulator.cpp \
+    caevoview.cpp \
+    imagewidget.cpp
 
 HEADERS += \
         mainwindow.h \
     carulemodel.h \
-    caitemdelegate.h
+    caitemdelegate.h \
+    casimulator.h \
+    caevoview.h \
+    imagewidget.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    caevoview.ui
